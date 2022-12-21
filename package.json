@@ -1,6 +1,6 @@
 {
   "name": "yauction-clipping-purchase",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "<yauction-clipping-purchase /> provides 「add to cart」&「direct buy」features for commerce site wiich means developers could adopt these features in any web pages they liked.",
   "main": "index.html",
   "scripts": {

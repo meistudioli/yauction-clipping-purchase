@@ -1161,6 +1161,7 @@ export class YauctionClippingPurchase extends HTMLElement {
   }
 
   show(id) {
+    mainSnackbar.active = false;
     this.#nodes.snackbar.active = false;
     this.#fetchProductInfo(id);
   }
