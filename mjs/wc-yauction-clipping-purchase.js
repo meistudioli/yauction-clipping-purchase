@@ -774,7 +774,7 @@ export class YauctionClippingPurchase extends HTMLElement {
         if (enable) {
           const index = combinations.findIndex(({ specNameId }) => specNameId === specId);
           const main = combinations.splice(index, 1);
-          const key = `${main[0].specValueId}-${combinations?.[0]?.specValueId || ''}`;
+          const key = `${main[0].specValueId}-${combinations[0]?.specValueId || ''}`;
 
           acc[key] = {
             id,
@@ -1144,7 +1144,7 @@ export class YauctionClippingPurchase extends HTMLElement {
             let modelId;
 
             if (specs.length > 1) {
-              modelId = (key === 0) ? `${value}-${fd?.[specs[1].id] || ''}` : `${fd?.[specs[0].id] || ''}-${value}`;
+              modelId = (key === 0) ? `${value}-${fd[specs[1].id] || ''}` : `${fd[specs[0].id] || ''}-${value}`;
               input.disabled = models?.[modelId] && models?.[modelId].quantity === 0;
             }
           }
@@ -1152,7 +1152,7 @@ export class YauctionClippingPurchase extends HTMLElement {
     }
 
     // price
-    let selectedModelId = specs.map(({ id }) => fd?.[id] || '').join('-');
+    let selectedModelId = specs.map(({ id }) => fd[id] || '').join('-');
     if (selectedModelId.indexOf('-') === -1) {
       // fix specs.length === 1
       selectedModelId += '-';
