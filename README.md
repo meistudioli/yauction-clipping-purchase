@@ -223,5 +223,5 @@ Set web service information for &lt;yauction-clipping-purchase />. It should be 
 ## Reference
 - [&lt;yauction-clipping-purchase />](https://blog.lalacube.com/mei/webComponent_msc-circle-progress.html)
 - [WEBCOMPONENTS.ORG](https://www.webcomponents.org/element/yauction-clipping-purchase)
-- [&lt;yauction-clipping-purchase />](https://blog.lalacube.com/mei/webComponent_msc-circle-progress.html)
+- [YouTube](https://www.youtube.com/watch?v=MFwjDsLr7d0)
 - [TW Yahoo! Auction](https://tw.bid.yahoo.com/)
