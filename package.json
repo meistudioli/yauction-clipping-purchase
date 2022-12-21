@@ -1,0 +1,26 @@
+{
+  "name": "yauction-clipping-purchase",
+  "version": "1.0.0",
+  "description": "<yauction-clipping-purchase /> provides 「add to cart」&「direct buy」features for commerce site wiich means developers could adopt these features in any web pages they liked.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meistudioli/yauction-clipping-purchase.git"
+  },
+  "keywords": [
+    "web",
+    "front-end",
+    "web component",
+    "commerce",
+    "direct buy"
+  ],
+  "author": "Paul Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meistudioli/yauction-clipping-purchase/issues"
+  },
+  "homepage": "https://github.com/meistudioli/yauction-clipping-purchase#readme"
+}
