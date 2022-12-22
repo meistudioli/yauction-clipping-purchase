@@ -163,7 +163,7 @@ Set localization for &lt;yauction-clipping-purchase />. It will replace some mes
 
 - `cart`：button 「add to cart」text. Default is ADD TO CART.
 - `buy`：button 「direct buy」text. Default is DIRECT BUY.
-- `pickSpec`：Warnning message when spec not pick. Default is Pick {{spec}} please.. Developers could apply {{spec}} as replace key for message.
+- `pickSpec`：Warnning message when spec not pick. Default is Pick {{spec}} please. Developers could apply {{spec}} as replace key for message.
 
 ```html
 <yauction-clipping-purchase
@@ -175,7 +175,7 @@ Set localization for &lt;yauction-clipping-purchase />. It will replace some mes
 
 - **webservice**
 
-Set web service information for &lt;yauction-clipping-purchase />. It should be JSON string. Developers could set `info`、`cart` api address here.（api address must be full path）
+Set web service information for &lt;yauction-clipping-purchase />. It should be JSON string. Developers could set `info`、`cart` api address here.
 
 - `info`：api address for product information fetching.
 - `cart`：api address for add product to cart fetching.
@@ -196,16 +196,17 @@ Set web service information for &lt;yauction-clipping-purchase />. It should be 
 | carturl | String | Getter / Setter for carturl. It will redirect to this url when 「direct buy」 button pressed. Default is `https://tw.bid.yahoo.com/cart`. |
 | params | Object | Getter / Setter for params. Each fetching will attached these parameters to api. Default is `{}`.|
 | l10n | Object | Getter / Setter for l10n. It will replace some message & button text to anything you like. Developers could set `cart`、`buy` and `pickSpec`. |
-| webservice | Object | Getter / Setter for webservice. Developers could set `info`、`cart` api address here.（api address must be full path） |
+| webservice | Object | Getter / Setter for webservice. Developers could set `info`、`cart` api address here. |
 | open | Boolean | Getter for &lt;yauction-clipping-purchase />'s open status. |
-| processing | Boolean | Getter for <yauction-clipping-purchase />'s fetching status.） |
-| productInfo | Object | Getter for current <yauction-clipping-purchase />'s product information. |
+| processing | Boolean | Getter for &lt;yauction-clipping-purchase />'s fetching status.） |
+| productInfo | Object | Getter for current &lt;yauction-clipping-purchase />'s product information. |
 
 ## Method
 
 | Method Signature | Description |
 | ----------- | ----------- |
-| show(merchandiseId) | Fetch & popup &lt;yauction-clipping-purchase />. Developers could call this method with argument > product id to popup <yauction-clipping-purchase />. Such as：element.show('100450639430') |
+| show(merchandiseId) | Fetch & popup &lt;yauction-clipping-purchase />. Developers could call this method with argument > product id to popup &lt;yauction-clipping-purchase />. Such as：element.show('100450639430') |
+| dismiss | Dismiss &lt;yauction-clipping-purchase />.|
 
 ## Event
 

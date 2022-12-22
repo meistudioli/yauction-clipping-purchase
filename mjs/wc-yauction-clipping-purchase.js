@@ -888,7 +888,9 @@ export class YauctionClippingPurchase extends HTMLElement {
 
       try {
         const infoUrl = info.replace(/{{merchandiseId}}/g, id);
-        const fetchUrl = new URL(infoUrl);
+        const base = !/^http(s)?:\/\/.*/.test(infoUrl) ? window.location.origin : undefined
+
+        const fetchUrl = new URL(infoUrl, base);
         const params = {
           ...this.params,
           id
@@ -945,7 +947,7 @@ export class YauctionClippingPurchase extends HTMLElement {
     this.#nodes.submits.forEach((button) => button.disabled = data.outOfStock);
     this.#data.product = data;
 
-    if (!dialog.open) {
+    if (!this.open) {
       dialog.showModal();
     } 
   }
@@ -1006,7 +1008,8 @@ export class YauctionClippingPurchase extends HTMLElement {
 
     try {
       const { cart } = this.webservice;
-      const fetchUrl = new URL(cart);
+      const base = !/^http(s)?:\/\/.*/.test(cart) ? window.location.origin : undefined
+      const fetchUrl = new URL(cart, base);
 
       Object.keys(fd).forEach((key) => fetchUrl.searchParams.set(key, fd[key]));
 
@@ -1148,6 +1151,12 @@ export class YauctionClippingPurchase extends HTMLElement {
   show(id) {
     this.#nodes.snackbar.active = false;
     this.#fetchProductInfo(id);
+  }
+
+  dismiss() {
+    if (this.open) {
+      this.#prepareClose('cancel');
+    }
   }
 }
 
