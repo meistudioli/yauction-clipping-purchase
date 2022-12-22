@@ -8,7 +8,7 @@
 
 Here comes &lt;yauction-clipping-purchase /> rised vision. With this clear view, vistors could add product to cart or buy it directly.
 
-![<msc-zoom />](https://blog.lalacube.com/mei/img/wc_visions/yauction-clipping-purchase.png)
+![<yauction-clipping-purchase />](https://blog.lalacube.com/mei/img/wc_visions/yauction-clipping-purchase.png)
 
 ## Basic Usage
 
@@ -35,8 +35,7 @@ Put &lt;yauction-clipping-purchase /> into HTML document. It will have different
       "l10n": {
         "cart": "ADD TO CART",
         "buy": "DIRECT BUY",
-        "pickSpec": "Pick「{{spec}}」please.",
-        "addToCartSuccess": "Add to cart success."
+        "pickSpec": "Pick「{{spec}}」please."
       },
       "params": {
         "id": "mei",
@@ -93,8 +92,7 @@ const config = {
   l10n: {
     cart: 'ADD TO CART',
     buy: 'DIRECT BUY',
-    pickSpec: 'Pick {{spec}} please.',
-    addToCartSuccess: 'Add to cart success.'
+    pickSpec: 'Pick {{spec}} please.'
   },
   webservice: {
     info: 'https://your-domain/getProductInformation',
@@ -161,16 +159,15 @@ Set parameters for &lt;yauction-clipping-purchase />. It should be JSON string. 
 
 - **l10n**
 
-Set localization for &lt;yauction-clipping-purchase />. It will replace some message & button text to anything you like. It should be JSON string. Developers could set `cart`、`buy`、`pickSpec` and `addToCartSuccess`.
+Set localization for &lt;yauction-clipping-purchase />. It will replace some message & button text to anything you like. It should be JSON string. Developers could set `cart`、`buy` and `pickSpec`.
 
 - `cart`：button 「add to cart」text. Default is ADD TO CART.
 - `buy`：button 「direct buy」text. Default is DIRECT BUY.
 - `pickSpec`：Warnning message when spec not pick. Default is Pick {{spec}} please.. Developers could apply {{spec}} as replace key for message.
-- `addToCartSuccess`：Notification message when add to cart finished. Default is Add to cart success..
 
 ```html
 <yauction-clipping-purchase
-  l10n='{"cart":"ADD TO CART","buy":"DIRECT BUY","pickSpec":"Pick {{spec}} please.","addToCartSuccess":"Add to cart success."}'
+  l10n='{"cart":"ADD TO CART","buy":"DIRECT BUY","pickSpec":"Pick {{spec}} please."}'
 >
   ...
 </yauction-clipping-purchase>
@@ -198,7 +195,7 @@ Set web service information for &lt;yauction-clipping-purchase />. It should be 
 | ----------- | ----------- | ----------- |
 | carturl | String | Getter / Setter for carturl. It will redirect to this url when 「direct buy」 button pressed. Default is `https://tw.bid.yahoo.com/cart`. |
 | params | Object | Getter / Setter for params. Each fetching will attached these parameters to api. Default is `{}`.|
-| l10n | Object | Getter / Setter for l10n. It will replace some message & button text to anything you like. Developers could set `cart`、`buy`、`pickSpec` and `addToCartSuccess`. |
+| l10n | Object | Getter / Setter for l10n. It will replace some message & button text to anything you like. Developers could set `cart`、`buy` and `pickSpec`. |
 | webservice | Object | Getter / Setter for webservice. Developers could set `info`、`cart` api address here.（api address must be full path） |
 | open | Boolean | Getter for &lt;yauction-clipping-purchase />'s open status. |
 | processing | Boolean | Getter for <yauction-clipping-purchase />'s fetching status.） |
@@ -215,9 +212,10 @@ Set web service information for &lt;yauction-clipping-purchase />. It should be 
 | Event Signature | Description |
 | ----------- | ----------- |
 | yauction-clipping-purchase-add-to-cart-success | Fired when &lt;yauction-clipping-purchase /> successed for adding to cart action.（button「add to cart」pressed） |
+| yauction-clipping-purchase-direct-buy-success | Fired when &lt;yauction-clipping-purchase /> successed for direct buy action.（button「direct buy」pressed） |
 | yauction-clipping-purchase-processing | Fired when &lt;yauction-clipping-purchase /> started fetching. |
 | yauction-clipping-purchase-process-finish | Fired when &lt;yauction-clipping-purchase /> finished fetching. |
-| yauction-clipping-purchase-cancel | Fired when &lt;yauction-clipping-purchase /> canceled.（user closed <yauction-clipping-purchase />） |
+| yauction-clipping-purchase-cancel | Fired when &lt;yauction-clipping-purchase /> canceled.（user closed &lt;yauction-clipping-purchase />） |
 | yauction-clipping-purchase-error | Fired when &lt;yauction-clipping-purchase /> fetching error. Develpoers could gather information through `event.detail`. |
 
 ## Reference

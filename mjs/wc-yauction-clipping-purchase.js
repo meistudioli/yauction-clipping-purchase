@@ -8,7 +8,7 @@ import {
 } from './fuji-css.js';
 import he from './he.js';
 import Mustache from './mustache.js';
-import { MscSnackbar } from './wc-msc-snackbar.js';
+import './wc-msc-snackbar.js';
 
 const defaults = {
   carturl: 'https://tw.bid.yahoo.com/cart',
@@ -16,8 +16,7 @@ const defaults = {
   l10n: {
     cart: 'ADD TO CART',
     buy: 'DIRECT BUY',
-    pickSpec: 'Pick {{spec}} please.',
-    addToCartSuccess: 'Add to cart success.'
+    pickSpec: 'Pick {{spec}} please.'
   },
   webservice: {
     info: 'https://api.bid.yahoo.com/api/item/v1/bid/listings/{{merchandiseId}}',
@@ -29,6 +28,7 @@ const booleanAttrs = [];
 const objectAttrs = ['params', 'l10n', 'webservice'];
 const custumEvents = {
   addToCart: 'yauction-clipping-purchase-add-to-cart-success',
+  directBuy: 'yauction-clipping-purchase-direct-buy-success',
   processing: 'yauction-clipping-purchase-processing',
   processFinish: 'yauction-clipping-purchase-process-finish',
   cancel: 'yauction-clipping-purchase-cancel',
@@ -379,22 +379,6 @@ if (CSS?.registerProperty) {
 
 
 const productData = {}; // store product data
-
-// main snackbar
-_wcl.addStylesheetRules('.yauction-clipping-purchase__snackbar',
-  {
-    '--msc-snackbar-margin-block-end': 'max(var(--safe-area-bottom), 24px)'
-  }
-);
-const mainSnackbar = new MscSnackbar(
-  {
-    dismiss: {
-      hidden: false
-    }
-  }
-);
-document.body.appendChild(mainSnackbar);
-mainSnackbar.classList.add('yauction-clipping-purchase__snackbar');
 
 export class YauctionClippingPurchase extends HTMLElement {
   #data;
@@ -1079,8 +1063,12 @@ export class YauctionClippingPurchase extends HTMLElement {
     switch (type) {
       case 'buy':
         if (await this.#fetchAddToCart()) {
+          this.#fireEvent(custumEvents.directBuy);
           this.#prepareClose(type);
-          location.href = this.carturl;
+
+          if (this.carturl.length) {
+            location.href = this.carturl;
+          }
         }
         break;
 
@@ -1088,9 +1076,6 @@ export class YauctionClippingPurchase extends HTMLElement {
         if (await this.#fetchAddToCart()) {
           this.#fireEvent(custumEvents.addToCart);
           this.#prepareClose(type);
-
-          mainSnackbar.label = this.l10n.addToCartSuccess;
-          mainSnackbar.active = true;
         }
         break;
       }
@@ -1161,7 +1146,6 @@ export class YauctionClippingPurchase extends HTMLElement {
   }
 
   show(id) {
-    mainSnackbar.active = false;
     this.#nodes.snackbar.active = false;
     this.#fetchProductInfo(id);
   }

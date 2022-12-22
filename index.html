@@ -119,8 +119,7 @@ yauction-clipping-purchase:not(:defined){display:none;}
         "l10n": {
           "cart": "加入購物車",
           "buy": "直接購買",
-          "pickSpec": "請選擇「{{spec}}」，謝謝。",
-          "addToCartSuccess": "已成功加入購物車。"
+          "pickSpec": "請選擇「{{spec}}」，謝謝。"
         },
         "params": {
           "wssid": "R2jDLIaYrpGxA"
@@ -155,6 +154,7 @@ customElements.whenDefined('yauction-clipping-purchase').then(() => {
 
   const events = [
     'yauction-clipping-purchase-add-to-cart-success',
+    'yauction-clipping-purchase-direct-buy-success',
     'yauction-clipping-purchase-processing',
     'yauction-clipping-purchase-process-finish',
     'yauction-clipping-purchase-cancel',
@@ -168,6 +168,11 @@ customElements.whenDefined('yauction-clipping-purchase').then(() => {
 
     snackbar.active = false;
     switch (type) {
+      case 'yauction-clipping-purchase-add-to-cart-success':
+        snackbar.label = '已成功加入購物車。';
+        snackbar.active = true;
+        break;
+
       case 'yauction-clipping-purchase-error':
         snackbar.label = `${detail?.message} Try later, please.`;
         snackbar.active = true;
