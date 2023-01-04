@@ -830,7 +830,7 @@ export class YauctionClippingPurchase extends HTMLElement {
         label: this.#purify(title)
       },
       url: `https://tw.bid.yahoo.com/item/${id}`,
-      image: imgs?.[0]?.['crop01'] || 'https://s.yimg.com/ma/auc/item/icon/item-no-image.svg',
+      image: imgs?.[0]?.['crop01'] || imgs?.[0]?.['crop02'] || 'https://s.yimg.com/ma/auc/item/icon/item-no-image.svg',
       price,
       ...(original && !isMultiplePrice && { originalPrice: this.#dollarFormat(original) }),
       hasSpecs,
