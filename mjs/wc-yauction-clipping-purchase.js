@@ -1100,8 +1100,8 @@ export class YauctionClippingPurchase extends HTMLElement {
     const { price, fieldsets, main, form, snackbar } = this.#nodes;
     const target = evt.target.closest('input');
     const key = +target.dataset.key;
-    const formData = new FormData(form);
-    const fd = Object.fromEntries(formData.entries());
+    let formData = new FormData(form);
+    let fd = Object.fromEntries(formData.entries());
 
     snackbar.active = false;
 
@@ -1140,6 +1140,8 @@ export class YauctionClippingPurchase extends HTMLElement {
     }
 
     // price
+    formData = new FormData(form);
+    fd = Object.fromEntries(formData.entries()); // need to re-collect formData
     let selectedModelId = specs.map(({ id }) => fd[id] || '').join('-');
     if (selectedModelId.indexOf('-') === -1) {
       // fix specs.length === 1
