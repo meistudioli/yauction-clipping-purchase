@@ -129,7 +129,7 @@ ${_fujiDialog}
   --border-color: rgba(var(--bob)/.5);
 }
 
-.dialog-content{inline-size:37.5em;}
+.dialog-content{inline-size:37.5em;outline:0 none;}
 .main>*+*{margin-block-start:1em;}
 .merchandise{display:flex;gap:1em;aspect-ratio:3.32/1;}
 .merchandise__vision{block-size:100%;aspect-ratio:1/1;flex-shrink:0;border-radius:.5em;overflow:hidden;outline:0 none;}
@@ -743,6 +743,38 @@ export class YauctionClippingPurchase extends HTMLElement {
       }
     , []);
 
+    const specImages = specsOriginal.reduce(
+      (acc, spec) => {
+        const slots = spec.values.reduce(
+          (acc, slot) => {
+            const { id, images = [], enable = false } = slot;
+
+            if (!enable || !images.length) {
+              return acc;
+            }
+
+            const imageObject = images.reduce(
+              (acc, unit) => {
+                const { rule, url } = unit;
+
+                acc[rule] = url;
+                return acc;
+              }
+            , {});
+
+            acc[id] = imageObject['crop01'];
+
+            return acc;
+          }
+        , {});
+
+        return {
+          ...acc,
+          ...slots
+        };
+      }
+    , {});
+
     const specId = specs[0].id;
     const prices = [];
     const models = modelsOriginal.reduce(
@@ -836,6 +868,7 @@ export class YauctionClippingPurchase extends HTMLElement {
       hasSpecs,
       specs,
       models,
+      specImages,
       store: {
         name: he.decode(storeName).trim(),
         label: this.#purify(storeName),
@@ -888,7 +921,7 @@ export class YauctionClippingPurchase extends HTMLElement {
 
       try {
         const infoUrl = info.replace(/{{merchandiseId}}/g, id);
-        const base = !/^http(s)?:\/\/.*/.test(infoUrl) ? window.location.origin : undefined
+        const base = !/^http(s)?:\/\/.*/.test(infoUrl) ? window.location.origin : undefined;
 
         const fetchUrl = new URL(infoUrl, base);
         const params = {
@@ -1008,7 +1041,7 @@ export class YauctionClippingPurchase extends HTMLElement {
 
     try {
       const { cart } = this.webservice;
-      const base = !/^http(s)?:\/\/.*/.test(cart) ? window.location.origin : undefined
+      const base = !/^http(s)?:\/\/.*/.test(cart) ? window.location.origin : undefined;
       const fetchUrl = new URL(cart, base);
 
       Object.keys(fd).forEach((key) => fetchUrl.searchParams.set(key, fd[key]));
@@ -1092,8 +1125,10 @@ export class YauctionClippingPurchase extends HTMLElement {
   _onChange(evt) {
     const {
       product: {
+        image,
         specs,
         models,
+        specImages,
         price: priceOriginal
       }
     } = this.#data;
@@ -1147,7 +1182,14 @@ export class YauctionClippingPurchase extends HTMLElement {
       // fix specs.length === 1
       selectedModelId += '-';
     }
+
     price.textContent = models?.[selectedModelId]?.price || priceOriginal;
+
+    // vision
+    const selectedSpecs = specs.map(({ id }) => fd[id] || '').filter((id) => id.length > 0);
+    const find = selectedSpecs.findIndex((I) => specImages[I]);
+    const vision = main.querySelector('.merchandise__vision__img');
+    vision.src = find !== -1 ? specImages[selectedSpecs[find]] : image;
   }
 
   show(id) {
